@@ -134,7 +134,19 @@ function update() {
 
     //  Reset the players velocity (movement)
     player.body.velocity.x = 0;
-
+    
+    //pig.body.velocity.y = -50;
+    //pig.body.position.y = 100;
+    
+    console.log(pig.body.position.x)
+    if (750 > pig.body.position.x) {
+        pig.body.velocity.x = 150;
+        pig.animations.play('right');
+    } else {
+        pig.body.velocity.x = -150;
+        pig.animations.play('left');
+    }
+    
     if (cursors.left.isDown)
     {
         //  Move to the left
