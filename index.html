@@ -40,7 +40,7 @@ function create() {
     game.physics.startSystem(Phaser.Physics.ARCADE);
 
     //  A simple background for our game
-    game.add.sprite(0, 0, 'sky');
+    game.add.sprite(0, 0, 'sky').scale.setTo(1,1.5);
 
     //  The platforms group contains the ground and the 2 ledges we can jump on
     platforms = game.add.group();
@@ -89,11 +89,12 @@ function create() {
     pig.body.bounce.y = 0.2;
     pig.body.gravity.y = 300;
     pig.body.collideWorldBounds = true;
+    pig.body.velocity.x = 150;
 
     //  Our two animations, walking left and right.
     pig.animations.add('left', [0, 1], 10, true);
     pig.animations.add('right', [2, 3], 10, true);
-    
+    pig.animations.play('right');
     //  Finally some stars to collect
     stars = game.add.group();
 
@@ -138,13 +139,14 @@ function update() {
     //pig.body.velocity.y = -50;
     //pig.body.position.y = 100;
     
+    
     console.log(pig.body.position.x)
-    if (750 > pig.body.position.x) {
-        pig.body.velocity.x = 150;
-        pig.animations.play('right');
-    } else {
+    if (pig.body.position.x > 750) {
         pig.body.velocity.x = -150;
         pig.animations.play('left');
+    } else if (pig.body.position.x < 50) {
+        pig.body.velocity.x = 150;
+        pig.animations.play('right');
     }
     
     if (cursors.left.isDown)
