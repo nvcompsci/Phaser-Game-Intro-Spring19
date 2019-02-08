@@ -72,7 +72,7 @@ function create() {
 
     //  Player physics properties. Give the little guy a slight bounce.
     player.body.bounce.y = 0.2;
-    player.body.gravity.y = 300;
+    player.body.gravity.y = 500;
     player.body.collideWorldBounds = true;
 
     //  Our two animations, walking left and right.
@@ -182,7 +182,13 @@ function update() {
     
 function pigVsHero(player, pig) {
     
-    player.kill();
+    if (player.body.position.y < pig.body.position.y - 20) {
+       pig.kill(); 
+    } else {
+        player.kill();
+    }
+    
+    
 }
 
 function collectStar (player, star) {
